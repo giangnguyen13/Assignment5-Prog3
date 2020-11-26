@@ -23,80 +23,30 @@ namespace Assignment5_Prog3
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Patient> patients;
         public MainWindow()
         {
             InitializeComponent();
 
-            //Console.WriteLine("Hello world");
-            try
+            patients = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("biostats.csv"));
+            foreach (Patient p in patients)
             {
-                ReadCsv(@"H:\Programming3-project\biostats.csv");
+                MessageBox.Show(p.ToString());
             }
-            catch (Exception e)
-            {
-                //Console.WriteLine(e.Message);
-            }
-            //Console.ReadKey();
         }
 
-        static void ReadCsv(string fileLocation)
+        /*
+         * Get file location which file is placed same folder as solution
+         * 
+         * @param string fileName
+         * 
+         * @return string fileLocation
+         */
+        private string GetCsvFileLocation(string fileName)
         {
-            //// open the file "data.csv" which is a CSV file without headers
-            //using (var csv = new CachedCsvReader(new StreamReader("data.csv"), false))
-            //{
-            //    csv.Columns.Add(new Column { Name = "PriceDate", Type = typeof(DateTime) });
-            //    csv.Columns.Add(new Column { Name = "OpenPrice", Type = typeof(decimal) });
-            //    csv.Columns.Add(new Column { Name = "HighPrice", Type = typeof(decimal) });
-            //    csv.Columns.Add(new Column { Name = "LowPrice", Type = typeof(decimal) });
-            //    csv.Columns.Add(new Column { Name = "ClosePrice", Type = typeof(decimal) });
-            //    csv.Columns.Add(new Column { Name = "Volume", Type = typeof(int) });
-
-            //    // Field headers will now be picked from the Columns collection
-            //    myDataGrid.DataSource = csv;
-            //}
-            var csvTable = new DataTable();
-            using (var csvReader = new CsvReader(new StreamReader(File.OpenRead(fileLocation)), true))
-            {
-                csvTable.Load(csvReader);
-            }
-            //foreach (var column in csvTable.Columns) 
-            //{
-            //    string Column1 = column.ToString();
-            //    Console.WriteLine(Column1);
-            //}
-
-            //foreach (var row in csvTable.Rows)
-            //{
-            //    foreach (var column in csvTable.Columns)
-            //    {
-            //        string Column1 = column.ToString();
-            //        Console.Write(Column1 + ",");
-            //    }
-            //    Console.WriteLine("");
-            //}
-
-            for (int i = 0; i < 2/*csvTable.Rows.Count*/; i++)
-            {
-                string x = "";
-                for (int j = 0; j < csvTable.Columns.Count; j++)
-                {
-                    x += csvTable.Rows[i][j].ToString() + ",";//Console.Write();
-                }
-
-                if (true)//negative row
-                {
-                    //remove 
-                }
-                //Console.WriteLine("");
-                MessageBox.Show(x);
-            }
-
-
-            // Similarly we can access the rows of the .csv file as ,
-
-            //string Row1 = csvTable.Rows[0][0].ToString();
-            //Console.WriteLine(Column1);
-            //Console.WriteLine(Row1);
+            string workingDirectory = Environment.CurrentDirectory;
+            string fileLocation = Directory.GetParent(workingDirectory).Parent.Parent.FullName + @"\" + fileName;//@"\biostats.csv";
+            return fileLocation;
         }
     }
 }
