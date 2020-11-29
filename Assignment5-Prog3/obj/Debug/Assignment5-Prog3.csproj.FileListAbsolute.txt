@@ -4,7 +4,6 @@ H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\bin\Debug\Assignment
 H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\bin\Debug\LumenWorks.Framework.IO.dll
 H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\bin\Debug\LumenWorks.Framework.IO.pdb
 H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\bin\Debug\LumenWorks.Framework.IO.xml
-H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\obj\Debug\Assignment5-Prog3.csprojAssemblyReference.cache
 H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\obj\Debug\MainWindow.g.cs
 H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\obj\Debug\App.g.cs
 H:\Programming3-project\Assignment5-Prog3\Assignment5-Prog3\obj\Debug\Assignment5-Prog3_MarkupCompile.cache
