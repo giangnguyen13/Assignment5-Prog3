@@ -23,16 +23,14 @@ namespace Assignment5_Prog3
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Patient> patients;
+        List<StockData> stockDatas;
         public MainWindow()
         {
             InitializeComponent();
-
-            patients = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("biostats.csv"));
-            foreach (Patient p in patients)
-            {
-                MessageBox.Show(p.ToString());
-            }
+            stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
+            MessageBox.Show($"Count Row: {stockDatas.Count}");
+            StockData a = stockDatas.FirstOrDefault();
+            MessageBox.Show(a.ToString());
         }
 
         /*
@@ -45,7 +43,7 @@ namespace Assignment5_Prog3
         private string GetCsvFileLocation(string fileName)
         {
             string workingDirectory = Environment.CurrentDirectory;
-            string fileLocation = Directory.GetParent(workingDirectory).Parent.Parent.FullName + @"\" + fileName;//@"\biostats.csv";
+            string fileLocation = Directory.GetParent(workingDirectory).Parent.Parent.FullName + @"\" + fileName;
             return fileLocation;
         }
     }
