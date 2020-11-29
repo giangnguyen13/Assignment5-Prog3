@@ -28,9 +28,11 @@ namespace Assignment5_Prog3
         {
             InitializeComponent();
             stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
-            MessageBox.Show($"Count Row: {stockDatas.Count}");
-            StockData a = stockDatas.FirstOrDefault();
-            MessageBox.Show(a.ToString());
+            //MessageBox.Show($"Count Row: {stockDatas.Count}");
+            //StockData a = stockDatas.FirstOrDefault();
+            //MessageBox.Show(a.ToString());
+
+            dataGridDisplay.ItemsSource = stockDatas;
         }
 
         /*
@@ -45,6 +47,26 @@ namespace Assignment5_Prog3
             string workingDirectory = Environment.CurrentDirectory;
             string fileLocation = Directory.GetParent(workingDirectory).Parent.Parent.FullName + @"\" + fileName;
             return fileLocation;
+        }
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var query = from stock in stockDatas
+                        where stock.Symbol == textBoxSearch.Text.ToString().ToUpper()
+                        orderby stock.ReleaseDate ascending
+                        select new { stock.Symbol,
+                                     stock.ReleaseDate,
+                                     stock.Open,
+                                     stock.High,
+                                     stock.Low,
+                                     stock.Close
+                                   };
+
+            dataGridSearch.ItemsSource = query;
+            dataGridSearch.Items.Refresh();
+
+            MessageBox.Show($"Number of records found: {query.Count()}");
+
         }
     }
 }
