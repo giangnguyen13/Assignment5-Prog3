@@ -1,10 +1,12 @@
 ﻿using LumenWorks.Framework.IO.Csv;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,12 +29,6 @@ namespace Assignment5_Prog3
         public MainWindow()
         {
             InitializeComponent();
-            stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
-            //MessageBox.Show($"Count Row: {stockDatas.Count}");
-            //StockData a = stockDatas.FirstOrDefault();
-            //MessageBox.Show(a.ToString());
-
-            dataGridDisplay.ItemsSource = stockDatas;
         }
 
         /*
@@ -49,24 +45,41 @@ namespace Assignment5_Prog3
             return fileLocation;
         }
 
-        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        private async void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
+            progressBarSearchLoading.Visibility = Visibility.Visible;
+            progressBarSearchLabel.Visibility = Visibility.Visible;
+
+            await Task.Run(() => {
+                Thread.Sleep(2000);
+            });
+
             var query = from stock in stockDatas
                         where stock.Symbol == textBoxSearch.Text.ToString().ToUpper()
                         orderby stock.ReleaseDate ascending
                         select new { stock.Symbol,
-                                     stock.ReleaseDate,
-                                     stock.Open,
-                                     stock.High,
-                                     stock.Low,
-                                     stock.Close
-                                   };
+                            stock.ReleaseDate,
+                            stock.Open,
+                            stock.High,
+                            stock.Low,
+                            stock.Close
+                        };
 
             dataGridSearch.ItemsSource = query;
             dataGridSearch.Items.Refresh();
 
+            progressBarSearchLoading.Visibility = Visibility.Hidden;
+            progressBarSearchLabel.Visibility = Visibility.Hidden;
             MessageBox.Show($"Number of records found: {query.Count()}");
+        }
 
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
+            Thread.Sleep(2000);
+            dataGridDisplay.ItemsSource = stockDatas;
+            progressBarMainLabel.Visibility = Visibility.Hidden;
+            progressBarMainLoading.Visibility = Visibility.Hidden;
         }
     }
 }
