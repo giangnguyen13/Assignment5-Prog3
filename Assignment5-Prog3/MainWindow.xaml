@@ -29,5 +29,6 @@
         </DataGrid>
         <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" Margin="415,188,0,0" VerticalAlignment="Top" Width="110" Height="34" Click="ButtonSearch_Click"/>
         <TextBox x:Name="textBoxSearch" HorizontalAlignment="Left" Height="34" Margin="178,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="34" Margin="570,188,0,0" VerticalAlignment="Top" Width="175"/>
     </Grid>
 </Window>

@@ -33,6 +33,8 @@ namespace Assignment5_Prog3
             //MessageBox.Show(a.ToString());
 
             dataGridDisplay.ItemsSource = stockDatas;
+            progressBar.Visibility = Visibility.Hidden;
+
         }
 
         /*
@@ -51,21 +53,35 @@ namespace Assignment5_Prog3
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
+            progressBar.Visibility = Visibility.Visible;
+
             var query = from stock in stockDatas
                         where stock.Symbol == textBoxSearch.Text.ToString().ToUpper()
                         orderby stock.ReleaseDate ascending
-                        select new { stock.Symbol,
-                                     stock.ReleaseDate,
-                                     stock.Open,
-                                     stock.High,
-                                     stock.Low,
-                                     stock.Close
-                                   };
+                        select new
+                        {
+                            stock.Symbol,
+                            stock.ReleaseDate,
+                            stock.Open,
+                            stock.High,
+                            stock.Low,
+                            stock.Close
+                        };
 
             dataGridSearch.ItemsSource = query;
             dataGridSearch.Items.Refresh();
 
+            progressBar.Minimum = 0;
+            progressBar.Maximum = query.Count();
+
+            for (int i = 0; i <= query.Count(); i++)
+            {
+                progressBar.Value = i;
+            }
+
             MessageBox.Show($"Number of records found: {query.Count()}");
+            progressBar.Visibility = Visibility.Hidden;
+            progressBar.Value = 0;
 
         }
     }
