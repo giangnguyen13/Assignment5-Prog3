@@ -51,7 +51,7 @@ namespace Assignment5_Prog3
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
 
-            worker.RunWorkerAsync();
+            worker.RunWorkerAsync(); //starts progress tracker for the progress bar
 
             stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
             MessageBox.Show($"Count Row: {stockDatas.Count}");
@@ -65,6 +65,14 @@ namespace Assignment5_Prog3
             {
                 (sender as BackgroundWorker).ReportProgress(i); //fake progress - needs to receive progress from ReadCSVAPI but its a static class
             }
+            /*
+            int progress;
+            do
+            {
+                progress = Convert.ToInt32(ReadCsvAPI.progressValue * 100);
+                (sender as BackgroundWorker).ReportProgress(progress);
+            } while (progress <= 100)
+            */
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

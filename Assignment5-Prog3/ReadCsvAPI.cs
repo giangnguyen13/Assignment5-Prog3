@@ -54,7 +54,8 @@ namespace Assignment5_Prog3
         //        return patients;
         //    }
         //}
-
+        
+        //public float progressValue = 0;
         public static List<StockData> ReadDataFromCsv(string fileLocation)
         {
             List<StockData> stockDatas = new List<StockData>();
@@ -81,6 +82,7 @@ namespace Assignment5_Prog3
                         continue;
                     }
                     stockDatas.Add(stockData);
+                    //progressValue = i / csvTable.Rows.Count;
                 }
 
                 // Replica the long task because > 3000 rows is not long enough
