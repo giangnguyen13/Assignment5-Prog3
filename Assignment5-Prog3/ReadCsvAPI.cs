@@ -84,7 +84,7 @@ namespace Assignment5_Prog3
                 }
 
                 // Replica the long task because > 3000 rows is not long enough
-                Thread.Sleep(5000);
+                //Thread.Sleep(5000);
 
                 return stockDatas;
             }
