@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace Assignment5_Prog3
 {
@@ -27,10 +28,6 @@ namespace Assignment5_Prog3
         public MainWindow()
         {
             InitializeComponent();
-            stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
-            MessageBox.Show($"Count Row: {stockDatas.Count}");
-            StockData a = stockDatas.FirstOrDefault();
-            MessageBox.Show(a.ToString());
         }
 
         /*
@@ -46,5 +43,34 @@ namespace Assignment5_Prog3
             string fileLocation = Directory.GetParent(workingDirectory).Parent.Parent.FullName + @"\" + fileName;
             return fileLocation;
         }
+
+        private void Progress_Render(object sender, EventArgs e)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+
+            worker.RunWorkerAsync();
+
+            stockDatas = ReadCsvAPI.ReadDataFromCsv(GetCsvFileLocation("stockData.csv"));
+            MessageBox.Show($"Count Row: {stockDatas.Count}");
+            StockData a = stockDatas.FirstOrDefault();
+            MessageBox.Show(a.ToString());
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                (sender as BackgroundWorker).ReportProgress(i); //fake progress - needs to receive progress from ReadCSVAPI but its a static class
+            }
+        }
+
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            loadingBar.Value = e.ProgressPercentage;
+        }
+
     }
 }
