@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="dataGridDisplay" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="144" Margin="20,21,0,0" VerticalAlignment="Top" Width="752">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ReleaseDate, StringFormat=d}" Header="ReleaseDate" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Open, StringFormat=C}" Width="*" Header="Open"/>
+                <DataGridTextColumn Binding="{Binding High, StringFormat=C}" Width="*" Header="High"/>
+                <DataGridTextColumn Binding="{Binding Low, StringFormat=C}"  Width="*" Header="Low" />
+                <DataGridTextColumn Binding="{Binding Close, StringFormat=C}"  Width="*" Header="Close" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dataGridSearch" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="147" Margin="20,252,0,0" VerticalAlignment="Top" Width="752">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ReleaseDate, StringFormat=d}" Header="ReleaseDate" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Open, StringFormat=C}" Width="*" Header="Open"/>
+                <DataGridTextColumn Binding="{Binding High, StringFormat=C}" Width="*" Header="High"/>
+                <DataGridTextColumn Binding="{Binding Low, StringFormat=C}"  Width="*" Header="Low" />
+                <DataGridTextColumn Binding="{Binding Close, StringFormat=C}"  Width="*" Header="Close" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" Margin="415,188,0,0" VerticalAlignment="Top" Width="110" Height="34" Click="ButtonSearch_Click"/>
+        <TextBox x:Name="textBoxSearch" HorizontalAlignment="Left" Height="34" Margin="178,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="193"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="34" Margin="570,188,0,0" VerticalAlignment="Top" Width="175"/>
     </Grid>
 </Window>
